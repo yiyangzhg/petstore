@@ -1,4 +1,5 @@
 import { useState } from "react"
+import mintToken from "../flow/transaction/MintToken.tx";
 import FileSelector from "./FileSelector";
 
 
@@ -26,9 +27,18 @@ const Form = () => {
     setPet({...pet, age});
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await mintToken(pet);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div style={style}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="row">
           <FileSelector pet={pet} setPet={setPet} />
           <div>

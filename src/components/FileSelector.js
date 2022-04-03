@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const FileSelector = ({pet, setPet}) => {
   const readFiles = (event) => {
     const files = event.target.files;
@@ -12,7 +10,6 @@ const FileSelector = ({pet, setPet}) => {
     <div className="">
       <label for="fileInput">Image</label>
       <input type="file" onChange={readFiles} />
-      {/* TODO Add readFiles handler */}
     </div>
   );
 };
