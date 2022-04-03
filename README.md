@@ -1,8 +1,6 @@
-# Getting Started with Create React App
+# PeToken: Pet NFT Minter & Marketplace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## Available Frontend-Scripts
 
 In the project directory, you can run:
 
@@ -39,32 +37,46 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Prerequisites for the following Backend-Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Flow command line tool][flow-cli]
 
-### Code Splitting
+### `flow emulator`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The Flow Emulator is a lightweight tool that emulates the behaviour of the real Flow network.
 
-### Analyzing the Bundle Size
+### `flow project deploy`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This command automatically deploys your project's contracts based on the configuration defined in your `flow.json` file.
 
-### Making a Progressive Web App
+[flow-cli]: https://www.onflow.org/cli/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `flow transactions send src/flow/transaction/MintToken.cdc '{"name": "Max", "breed": "Bulldog"}'`
 
-### Advanced Configuration
+Mint a NFT for the pet object.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `flow accounts create --key <PUBLIC_KEY> --signer emulator-account`
 
-### Deployment
+Create another account, then you need to replace the address for `test-account` in `flow.json` with the new address you obtained in your terminal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### `flow transactions send src/flow/transaction/InitCollection.cdc —-signer test-account`
 
-### `npm run build` fails to minify
+Initialize the wallet for test-account.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `flow transactions send src/flow/transaction/TransferToken.cdc 1 <RECEIVER_ADDRESS>`
+
+Send NFT with id 1 to a address, which is the address for test-account.
+
+### `flow scripts execute src/flow/script/GetTokenOwner.cdc <TOKEN_ID>`
+
+Get the owner's address of the NFT with <TOKEN_ID>.
+
+### `flow scripts execute src/flow/script/GetTokenMetadata.cdc <TOKEN_ID>`
+
+Get the metadata of the NFT with <TOKEN_ID>.
+
+### `flow scripts execute src/flow/script/GetAllTokenIds.cdc`
+
+Get all NFT ids/
