@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+
+@import "./skeleton.css";
+@import "./normalize.css";
