@@ -15,7 +15,6 @@ async function mintToken(pet) {
 async function uploadToStorage(pet) {
   let metadata = await storage.store({
     ...pet,
-    image: pet.image && new File([pet.image], `${pet.name}.jpg`, { type: 'image/jpg' }),
     description: `${pet.name}'s metadata`,
   });
 
@@ -31,10 +30,12 @@ function toCadenceDict(pet) {
   delete newPet.image;
 
   // Return an array of [{key: string, value: string}].
-  return Object.keys(newPet).map((k) => ({key: k, value: pet[k]}));
+  return Object.keys(newPet).map((k) => ({key: k.toString(), value: pet[k].toString()}));
 }
 
 async function mintPet(metadata) {
+  fcl.currentUser().subscribe(currentUser => console.log(currentUser));
+
   // Convert the metadata into a {String: String} type. See below.
   const dict = toCadenceDict(metadata);
 

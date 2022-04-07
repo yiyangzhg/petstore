@@ -4,8 +4,8 @@ import FileSelector from "./FileSelector";
 
 
 const style = {
-  padding: '5rem',
-  background: 'white',
+  marginLeft: 'auto',
+  marginRight: 'auto',
   maxWidth: 350,
 };
 
@@ -30,7 +30,8 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await mintToken(pet);
+      const txId = await mintToken(pet);
+      console.log(txId);
     } catch (err) {
       console.error(err);
     }
@@ -42,7 +43,7 @@ const Form = () => {
         <div className="row">
           <FileSelector pet={pet} setPet={setPet} />
           <div>
-            <label for="nameInput">Pet's name</label>
+            <label htmlFor="nameInput">Pet's name</label>
             <input
               className="u-full-width"
               type="text"
@@ -52,7 +53,7 @@ const Form = () => {
             />
           </div>
           <div>
-            <label for="breedInput">Breed</label>
+            <label htmlFor="breedInput">Breed</label>
             <select
               className="u-full-width"
               id="breedInput"
@@ -63,19 +64,19 @@ const Form = () => {
             </select>
           </div>
           <div>
-            <label for="ageInput">Age</label>
+            <label htmlFor="ageInput">Age</label>
             <select
               className="u-full-width"
               id="ageInput"
               onChange={setAge}
             >
               {
-                [...Array(20).keys()].map(age => <option value={age}>{age}</option>)
+                [...Array(20).keys()].map(age => <option value={age} key={age}>{age}</option>)
               }
             </select>
           </div>
         </div>
-        <input className="button-primary" type="submit" value="Mint" style={{ 'margin-top': '2rem' }} />
+        <input className="button-primary" type="submit" value="Mint" style={{ 'marginTop': '2rem' }} />
       </form>
     </div>
   );

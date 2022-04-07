@@ -8,7 +8,7 @@ const FileSelector = ({pet, setPet}) => {
 
   return (
     <div className="">
-      <label for="fileInput">Image</label>
+      <label htmlFor="fileInput">Image</label>
       <input type="file" onChange={readFiles} />
     </div>
   );
