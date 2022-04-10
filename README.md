@@ -1,4 +1,4 @@
-# PeToken: Pet NFT Minter & Marketplace
+# PetStore: Pet NFT Minter & Marketplace
 
 ## Available Frontend-Scripts
 
